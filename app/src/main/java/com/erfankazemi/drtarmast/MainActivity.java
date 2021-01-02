@@ -1,11 +1,5 @@
 package com.erfankazemi.drtarmast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import io.github.inflationx.calligraphy3.CalligraphyConfig;
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
-import io.github.inflationx.viewpump.ViewPump;
-import io.github.inflationx.viewpump.ViewPumpContextWrapper;
-
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
@@ -13,21 +7,30 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.erfankazemi.drtarmast.BMI.SexActivity;
-import com.erfankazemi.drtarmast.Pedometer.StepDetector;
-import com.erfankazemi.drtarmast.Pedometer.StepListener;
+import com.erfankazemi.drtarmast.SpeakTest.SpeakTestActivity;
+import com.erfankazemi.drtarmast.Util.Util;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener, StepListener {
+import androidx.appcompat.app.AppCompatActivity;
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
   private int numSteps;
-  private StepDetector simpleStepDetector;
-  private SensorManager sensorManager;
-  private Sensor accel;
-  TextView stepCounter ;
+  double coveredDistanceMeter;
+  TextView stepCounter;
   TextView coveredDistance;
+  SensorManager sensorManager;
+  Boolean running = false;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -43,16 +46,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
       .build());
     setContentView(R.layout.activity_main);
     //-------------------------------------------------------------------------
-    sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-    accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-    simpleStepDetector = new StepDetector();
-    simpleStepDetector.registerListener(this);
-    numSteps = 0;
-    sensorManager.registerListener(MainActivity.this, accel, SensorManager.SENSOR_DELAY_FASTEST);
+
+    sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
     //-------------------------------------------------------------------------
-    stepCounter  =findViewById(R.id.stepCounter);
+    stepCounter = findViewById(R.id.stepCounter);
     coveredDistance = findViewById(R.id.coveredDistance);
     //-------------------------------------------------------------------------
+    stepCounter.setText("1");
 
   }
 
@@ -66,24 +66,40 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     startActivity(intent);
   }
 
+  public void SpeakTest(View view) {
+    Intent intent = new Intent(this, SpeakTestActivity.class);
+    startActivity(intent);
+  }
+
   @Override
-  public void onSensorChanged(SensorEvent sensorEvent) {
-    if (sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-      simpleStepDetector.updateAccel(
-        sensorEvent.timestamp, sensorEvent.values[0], sensorEvent.values[1], sensorEvent.values[2]);
+  protected void onResume() {
+    super.onResume();
+    running = true;
+    Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+    if (countSensor != null) {
+      sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_NORMAL);
+    } else {
+      Toast.makeText(this, "گوشی شما فاقد سنسور گام شمار است!", Toast.LENGTH_SHORT).show();
     }
   }
 
   @Override
-  public void onAccuracyChanged(Sensor sensor, int i) {
-
+  protected void onPause() {
+    super.onPause();
+    running = false;
   }
 
   @Override
-  public void step(long timeNs) {
-    numSteps++;
-    stepCounter.setText(numSteps);
-    double distance=numSteps*0.00075;
-    coveredDistance.setText(""+distance);
+  public void onSensorChanged(SensorEvent event) {
+    if (running) {
+      stepCounter.setText(String.valueOf(event.values[0]));
+      coveredDistanceMeter = event.values[0] * 0.0008;
+      coveredDistance.setText(String.valueOf(Util.round(coveredDistanceMeter, 2) + "\n متر"));
+    }
   }
+
+  @Override
+  public void onAccuracyChanged(Sensor sensor, int accuracy) {
+  }
+
 }

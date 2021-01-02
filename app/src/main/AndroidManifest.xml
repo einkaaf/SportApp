@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.erfankazemi.drtarmast">
 
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DrTarmast">
-        <activity android:name=".BMI.BmiResultActivity"></activity>
+        <activity android:name=".SpeakTest.SpeakTestActivity"></activity>
+        <activity android:name=".BMI.BmiResultActivity" />
         <activity android:name=".BMI.WeightActivity" />
         <activity android:name=".BMI.HeightActivity" />
         <activity android:name=".BMI.SexActivity" />
