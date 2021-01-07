@@ -7,13 +7,12 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.erfankazemi.drtarmast.BMI.SexActivity;
-import com.erfankazemi.drtarmast.SpeakTest.SpeakTestActivity;
+import com.erfankazemi.drtarmast.SpeakTest.SpeakTestInfoActivity;
 import com.erfankazemi.drtarmast.Util.Util;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
   }
 
   public void SpeakTest(View view) {
-    Intent intent = new Intent(this, SpeakTestActivity.class);
+    Intent intent = new Intent(this, SpeakTestInfoActivity.class);
     startActivity(intent);
   }
 

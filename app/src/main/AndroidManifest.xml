@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DrTarmast">
-        <activity android:name=".SpeakTest.SpeakTestActivity"></activity>
+        <activity android:name=".SpeakTest.SpeakTestResultActivity"></activity>
+        <activity android:name=".SpeakTest.SpeakTestActivity" />
+        <activity android:name=".SpeakTest.SpeakTestInfoActivity" />
         <activity android:name=".BMI.BmiResultActivity" />
         <activity android:name=".BMI.WeightActivity" />
         <activity android:name=".BMI.HeightActivity" />

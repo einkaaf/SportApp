@@ -1,85 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/design_default_color_primary"
+    android:layout_gravity="center"
+    android:layout_weight="1"
+    android:background="@drawable/speak_background_gradient"
+    android:gravity="center_vertical"
     android:layoutDirection="rtl"
     android:orientation="vertical"
-    android:layout_weight="1"
-    tools:context=".SpeakTest.SpeakTestActivity">
+    tools:context=".SpeakTest.SpeakTestInfoActivity">
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:src="@drawable/running" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="تست صحبت چیست ؟"
+        android:textSize="20sp" />
+
+    <View
+        android:layout_width="250dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="@android:color/white" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text=" یکی از تمرین‌های رایج هوازی، به ویژه اگر هدفتون کاهش وزن و یا بالا بردن استقامت باشه، دویدنه! به خصوص دویدن بر روی تردمیل ،  این حقیقت که وقتی افراد تمرین هوازی را با شدتی اجرا می کنند که در مرز توانایی برای صحبت کردن آسان یا صحبت کردن به زحمت قرار گیرند، تپش قلبشان به حدود ۷۵ تا ۸۵ درصد حداکثر ضربان قلب می رسد، نشان می دهد تست “صحبت کردن” روش دقیقی است برای بدنسازان برای اینکه شدت تمرین هوازی خود را تنظیم کنند. برای انجام تست روی دکمه شروع کلیک کنید !"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:gravity="center|bottom"
+        android:orientation="horizontal"
+        android:padding="16dp"
         android:weightSum="1">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.8"
-            android:orientation="vertical">
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:layout_weight="0.5"
+            android:text="شروع تست"
+            android:textColor="@color/black"
+            android:onClick="startTest"
+            app:rippleColor="#93F89D" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="8dp"
-                android:elevation="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="16dp">
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:layout_weight="0.5"
+            android:text="بازگشت"
+            android:onClick="goHome"
+            android:textColor="@color/black"
+            app:rippleColor="#93F89D" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="سلام من یک ورزشکار هستم ! از نوع سختگی ناپذیر !"
-                        android:textColor="@color/black"
-                        android:textSize="25sp" />
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="bottom"
-            android:layout_weight="0.2"
-            android:gravity="bottom"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:gravity="bottom"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
-                    android:layout_weight="0.5"
-                    android:text="آسان خواندم"
-                    android:textColor="@color/black" />
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
-                    android:layout_weight="0.5"
-                    android:text="متوسط خواندم"
-                    android:textColor="@color/black" />
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</LinearLayout>
