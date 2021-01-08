@@ -4,78 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:layout_weight="1"
     android:background="@drawable/speak_background_gradient"
-    android:gravity="center_vertical"
-    android:layoutDirection="rtl"
-    android:orientation="vertical"
-    tools:context=".SpeakTest.SpeakTestInfoActivity">
-
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:layout_margin="16dp"
-        android:padding="16dp"
-        android:src="@drawable/running" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="8dp"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="تست صحبت چیست ؟"
-        android:textSize="20sp" />
-
-    <View
-        android:layout_width="250dp"
-        android:layout_height="1dp"
-        android:layout_gravity="center"
-        android:background="@android:color/white" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="8dp"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text=" یکی از تمرین‌های رایج هوازی، به ویژه اگر هدفتون کاهش وزن و یا بالا بردن استقامت باشه، دویدنه! به خصوص دویدن بر روی تردمیل ،  این حقیقت که وقتی افراد تمرین هوازی را با شدتی اجرا می کنند که در مرز توانایی برای صحبت کردن آسان یا صحبت کردن به زحمت قرار گیرند، تپش قلبشان به حدود ۷۵ تا ۸۵ درصد حداکثر ضربان قلب می رسد، نشان می دهد تست “صحبت کردن” روش دقیقی است برای بدنسازان برای اینکه شدت تمرین هوازی خود را تنظیم کنند. برای انجام تست روی دکمه شروع کلیک کنید !"
-        android:textColor="@color/black"
-        android:textSize="15sp" />
+    tools:context=".SpeakTest.SpeakTestActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center|bottom"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:weightSum="1">
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="0dp"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
             android:layout_margin="8dp"
-            android:layout_weight="0.5"
-            android:text="شروع تست"
-            android:textColor="@color/black"
-            android:onClick="startTest"
-            app:rippleColor="#93F89D" />
+            android:elevation="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="16dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="0dp"
-            android:layout_height="55dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="من تمام تلاشمو میکنم تا تمرینامو خوب انجام بدم"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:layout_weight="0.5"
-            android:text="بازگشت"
-            android:onClick="goHome"
-            android:textColor="@color/black"
-            app:rippleColor="#93F89D" />
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="انتخاب کنید :"
+                android:textColor="@color/black" />
+
+
+            <segmented_control.widget.custom.android.com.segmentedcontrol.SegmentedControl
+                android:id="@+id/segmented_control"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:layout_marginTop="16dp"
+                android:padding="8dp"
+                app:bottomLeftRadius="18sp"
+                app:columnCount="1"
+                app:segments="@array/speakArray"
+                app:selectedBackgroundColor="@color/white"
+                app:selectedTextColor="#E91E63"
+                app:strokeWidth="1dp"
+                app:textSize="25sp"
+                app:textVerticalPadding="6dp"
+                app:topRightRadius="18dp"
+                app:unSelectedStrokeColor="@color/white"
+                app:unSelectedTextColor="@color/white" />
+
+        </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.erfankazemi.drtarmast.MainActivity;
 import com.erfankazemi.drtarmast.R;
-import com.erfankazemi.drtarmast.Util.BmiCalculator;
+import com.erfankazemi.drtarmast.Util.BmiUtil;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,7 +58,7 @@ public class BmiResultActivity extends AppCompatActivity {
       }
     });
 
-    double bmiResult = BmiCalculator.Bmi();
+    double bmiResult = BmiUtil.Bmi();
 
     if (bmiResult < 18.5) {
       shortText.setText("دچار کمبود وزن هستید");

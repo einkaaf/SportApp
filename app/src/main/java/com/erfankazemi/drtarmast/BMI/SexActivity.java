@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.erfankazemi.drtarmast.R;
-import com.erfankazemi.drtarmast.Util.BmiCalculator;
+import com.erfankazemi.drtarmast.Util.BmiUtil;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -44,15 +44,15 @@ public class SexActivity extends AppCompatActivity {
         switch (direction) {
           case RIGHT:
             img.setImageResource(R.drawable.woman);
-            BmiCalculator.isMan = false;
+            BmiUtil.isMan = false;
             break;
           case LEFT:
             img.setImageResource(R.drawable.man);
-            BmiCalculator.isMan = true;
+            BmiUtil.isMan = true;
             break;
           default:
             img.setImageResource(R.drawable.man);
-            BmiCalculator.isMan = true;
+            BmiUtil.isMan = true;
             break;
         }
       }

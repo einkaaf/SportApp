@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.erfankazemi.drtarmast.R;
-import com.erfankazemi.drtarmast.Util.BmiCalculator;
+import com.erfankazemi.drtarmast.Util.BmiUtil;
 import com.ramotion.fluidslider.FluidSlider;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,7 +44,7 @@ public class HeightActivity extends AppCompatActivity {
       final String value = String.valueOf((int) (pos * 300));
       slider.setBubbleText(value);
       txt.setText(value + "\n" + "سانتیمتر");
-      BmiCalculator.height = Double.parseDouble(value);
+      BmiUtil.height = Double.parseDouble(value);
       return Unit.INSTANCE;
     });
   }

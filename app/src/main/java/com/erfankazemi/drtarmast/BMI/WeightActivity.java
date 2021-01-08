@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.erfankazemi.drtarmast.R;
-import com.erfankazemi.drtarmast.Util.BmiCalculator;
+import com.erfankazemi.drtarmast.Util.BmiUtil;
 import com.ramotion.fluidslider.FluidSlider;
 
 public class WeightActivity extends AppCompatActivity {
@@ -44,7 +44,7 @@ public class WeightActivity extends AppCompatActivity {
       final String value = String.valueOf((int) (pos * 250));
       slider.setBubbleText(value);
       txt.setText(value + "\n" + "کیلوگرم");
-      BmiCalculator.weight = Double.parseDouble(value);
+      BmiUtil.weight = Double.parseDouble(value);
       return Unit.INSTANCE;
     });
   }

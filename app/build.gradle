@@ -67,4 +67,7 @@ dependencies {
     //segment picker
     implementation 'com.github.RobertApikyan:SegmentedControl:1.2.0'
 
+    //android permission
+    implementation 'com.karumi:dexter:6.2.2'
+
 }
