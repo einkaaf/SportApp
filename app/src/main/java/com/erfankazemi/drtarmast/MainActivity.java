@@ -3,11 +3,9 @@ package com.erfankazemi.drtarmast;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +13,8 @@ import android.widget.Toast;
 import com.erfankazemi.drtarmast.BMI.SexActivity;
 import com.erfankazemi.drtarmast.SpeakTest.SpeakTestInfoActivity;
 import com.erfankazemi.drtarmast.Util.BmiUtil;
+import com.erfankazemi.drtarmast.Util.SPUtil;
+import com.erfankazemi.drtarmast.StepService.StepService;
 import com.erfankazemi.drtarmast.Util.Util;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -30,106 +30,91 @@ import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
 import io.github.inflationx.viewpump.ViewPump;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener {
+public class MainActivity extends AppCompatActivity {
 
-    private int numSteps;
-    double coveredDistanceMeter;
-    TextView stepCounter;
-    TextView coveredDistance;
-    TextView burnedCalories;
-    SensorManager sensorManager;
-    Boolean running = false;
+  TextView stepCounter;
+  TextView coveredDistance;
+  TextView burnedCalories;
+  SensorManager sensorManager;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //-------------------------------------------------------------------------
-        getSupportActionBar().hide();
-        //-------------------------------------------------------------------------
-        ViewPump.init(ViewPump.builder()
-                .addInterceptor(new CalligraphyInterceptor(
-                        new CalligraphyConfig.Builder()
-                                .setDefaultFontPath("fonts/Avtheme.ttf")
-                                .setFontAttrId(R.attr.fontPath)
-                                .build()))
-                .build());
-        setContentView(R.layout.activity_main);
-        //-------------------------------------Permission------------------------------------
-        Dexter.withContext(this)
-                .withPermission(Manifest.permission.ACTIVITY_RECOGNITION)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        Toast.makeText(MainActivity.this, "دسترسی لازم داده شد", Toast.LENGTH_SHORT).show();
-                    }
+  final Handler handler = new Handler();
 
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
-                        Toast.makeText(MainActivity.this, "برای محاسبه دقیق قدم شمار و کالری سوزانده شده به این دسترسی نیاز داریم !", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                        permissionToken.continuePermissionRequest();
-                    }
-                }).check();
-        //-------------------------------------------------------------------------
-
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        //-------------------------------------------------------------------------
-        stepCounter = findViewById(R.id.stepCounter);
-        coveredDistance = findViewById(R.id.coveredDistance);
-        burnedCalories = findViewById(R.id.txtCalories);
-        //-------------------------------------------------------------------------
-        stepCounter.setText("0");
-        burnedCalories.setText("0");
-
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
-    }
-
-    public void BmiCalculate(View view) {
-        Intent intent = new Intent(this, SexActivity.class);
-        startActivity(intent);
-    }
-
-    public void SpeakTest(View view) {
-        Intent intent = new Intent(this, SpeakTestInfoActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        running = true;
-        Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-        if (countSensor != null) {
-            sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        } else {
-            Toast.makeText(this, "گوشی شما فاقد سنسور گام شمار است!", Toast.LENGTH_SHORT).show();
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    //-------------------------------------------------------------------------
+    getSupportActionBar().hide();
+    //-------------------------------------------------------------------------
+    ViewPump.init(ViewPump.builder()
+      .addInterceptor(new CalligraphyInterceptor(
+        new CalligraphyConfig.Builder()
+          .setDefaultFontPath("fonts/Avtheme.ttf")
+          .setFontAttrId(R.attr.fontPath)
+          .build()))
+      .build());
+    setContentView(R.layout.activity_main);
+    //-------------------------------------Permission------------------------------------
+    Dexter.withContext(this)
+      .withPermission(Manifest.permission.ACTIVITY_RECOGNITION)
+      .withListener(new PermissionListener() {
+        @Override
+        public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+          Toast.makeText(MainActivity.this, "دسترسی لازم داده شد", Toast.LENGTH_SHORT).show();
         }
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        running = false;
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        if (running) {
-            stepCounter.setText(String.valueOf(event.values[0]));
-            coveredDistance.setText(String.valueOf(Util.round(BmiUtil.getCoverdDistance(event.values[0]), 2)));
-            burnedCalories.setText(String.valueOf(Util.round(BmiUtil.getBurnedCaleries(event.values[0]), 2)));
+        @Override
+        public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+          Toast.makeText(MainActivity.this, "برای محاسبه دقیق قدم شمار و کالری سوزانده شده به این دسترسی نیاز داریم !", Toast.LENGTH_SHORT).show();
         }
-    }
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-    }
+        @Override
+        public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+          permissionToken.continuePermissionRequest();
+        }
+      }).check();
+    //-------------------------------------------------------------------------
+    stepCounter = findViewById(R.id.stepCounter);
+    coveredDistance = findViewById(R.id.coveredDistance);
+    burnedCalories = findViewById(R.id.txtCalories);
+    //-------------------------------------------------------------------------
+    stepCounter.setText("0");
+    burnedCalories.setText("0");
+
+
+    Intent serviceintent = new Intent(this, StepService.class);
+    startService(serviceintent);
+
+  }
+
+  @Override
+  protected void onResume() {
+    final int delay = 1500;
+    handler.postDelayed(new Runnable() {
+      public void run() {
+//        Toast.makeText(MainActivity.this, "I am running " + SPUtil.getStep(MainActivity.this), Toast.LENGTH_SHORT).show();
+        double step = SPUtil.getStep(MainActivity.this);
+        stepCounter.setText(String.valueOf(step));
+        coveredDistance.setText(String.valueOf(BmiUtil.getCoverdDistance(step)));
+        burnedCalories.setText(String.valueOf(BmiUtil.getBurnedCaleries(step)));
+        handler.postDelayed(this, delay);
+      }
+    }, delay);
+    super.onResume();
+  }
+
+  @Override
+  protected void attachBaseContext(Context newBase) {
+    super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+  }
+
+  public void BmiCalculate(View view) {
+    Intent intent = new Intent(this, SexActivity.class);
+    startActivity(intent);
+  }
+
+  public void SpeakTest(View view) {
+    Intent intent = new Intent(this, SpeakTestInfoActivity.class);
+    startActivity(intent);
+  }
 
 }

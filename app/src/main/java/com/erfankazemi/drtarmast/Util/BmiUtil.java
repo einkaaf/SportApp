@@ -18,13 +18,11 @@ public class BmiUtil {
     }
 
     public static double getBurnedCaleries(double step) {
-        double burnedCaleries = step * 0.5263;
-        return burnedCaleries;
+        return Util.round(step * 0.5263,2);
     }
 
     public static double getCoverdDistance(double step) {
-        double coverdDistance = step * 0.0008;
-        return coverdDistance;
+        return Util.round(step * 0.0008,2);
     }
 
 }
