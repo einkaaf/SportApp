@@ -93,9 +93,9 @@ public class MainActivity extends AppCompatActivity {
       public void run() {
 //        Toast.makeText(MainActivity.this, "I am running " + SPUtil.getStep(MainActivity.this), Toast.LENGTH_SHORT).show();
         double step = SPUtil.getStep(MainActivity.this);
-        stepCounter.setText(String.valueOf(step));
-        coveredDistance.setText(String.valueOf(BmiUtil.getCoverdDistance(step)));
-        burnedCalories.setText(String.valueOf(BmiUtil.getBurnedCaleries(step)));
+        stepCounter.setText(Util.toPersianNumber(String.valueOf(step)));
+        coveredDistance.setText(Util.toPersianNumber(String.valueOf(BmiUtil.getCoverdDistance(step))));
+        burnedCalories.setText(Util.toPersianNumber(String.valueOf(BmiUtil.getBurnedCaleries(step))));
         handler.postDelayed(this, delay);
       }
     }, delay);

@@ -16,6 +16,7 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.erfankazemi.drtarmast.MainActivity;
@@ -62,6 +63,7 @@ public class StepService extends Service implements SensorEventListener {
     handler.postDelayed(new Runnable() {
       public void run() {
 //        Toast.makeText(StepService.this, "I am running " + SPUtil.getStep(StepService.this), Toast.LENGTH_SHORT).show();
+        Log.i("SERVICE", "START-SERVICE-COMMAND");
         handler.postDelayed(this, delay);
       }
     }, delay);
