@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.erfankazemi.drtarmast.MainActivity;
 import com.erfankazemi.drtarmast.R;
-import com.erfankazemi.drtarmast.Util.SPUtil;
+import com.erfankazemi.drtarmast.Util.Util;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -30,6 +30,7 @@ import androidx.core.app.NotificationCompat;
 public class StepService extends Service implements SensorEventListener {
 
   SensorManager sensorManager;
+  boolean running = true;
 
   @Override
   public void onCreate() {
@@ -73,8 +74,8 @@ public class StepService extends Service implements SensorEventListener {
 
   @RequiresApi(api = Build.VERSION_CODES.O)
   private void startMyOwnForeground() {
-    String NOTIFICATION_CHANNEL_ID = "erfankazemi.sport";
-    String channelName = "Sport App Channel";
+    String NOTIFICATION_CHANNEL_ID = "erfankazemi.sport.1";
+    String channelName = "Sport App Channel 2";
 
     NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_HIGH);
     chan.setLightColor(Color.BLUE);
@@ -89,9 +90,9 @@ public class StepService extends Service implements SensorEventListener {
 
     NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
     Notification notification = notificationBuilder.setOngoing(true)
-      .setSmallIcon(R.drawable.ic_launcher_background)
+      .setSmallIcon(R.drawable.climb)
       .setContentTitle("Step Counter is Running!")
-      .setContentText("Dr Tarmast Sport App")
+      .setContentText("Dr Tarmast Health App")
       .setPriority(NotificationManager.IMPORTANCE_MIN)
       .setCategory(Notification.CATEGORY_SERVICE)
       .setContentIntent(pendingIntent)
@@ -122,8 +123,25 @@ public class StepService extends Service implements SensorEventListener {
   //--------------------------------------------------------------------------------------------------------------------------------
   @Override
   public void onSensorChanged(SensorEvent event) {
-    SPUtil.saveStep(event.values[0], this);
-    Toast.makeText(this, "Step saved: " + event.values[0], Toast.LENGTH_SHORT).show();
+
+    if (event.values[0] > 50) {
+
+      sensorManager.unregisterListener(this);
+      running = false;
+      Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
+    }
+    if (running) {
+      Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+      sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_NORMAL);
+      Util.aa = event.values[0];
+      Toast.makeText(this, "2", Toast.LENGTH_SHORT).show();
+
+    } else {
+      event.values[0] = 0;
+      Util.aa= event.values[0];
+      Toast.makeText(this, "3", Toast.LENGTH_SHORT).show();
+    }
+
   }
 
   @Override

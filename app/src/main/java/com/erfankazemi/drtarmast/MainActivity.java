@@ -11,10 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.erfankazemi.drtarmast.BMI.SexActivity;
+import com.erfankazemi.drtarmast.BorgTest.BorgTestActivity;
 import com.erfankazemi.drtarmast.SpeakTest.SpeakTestInfoActivity;
-import com.erfankazemi.drtarmast.Util.BmiUtil;
-import com.erfankazemi.drtarmast.Util.SPUtil;
 import com.erfankazemi.drtarmast.StepService.StepService;
+import com.erfankazemi.drtarmast.Util.BmiUtil;
 import com.erfankazemi.drtarmast.Util.Util;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -24,18 +24,18 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
 import io.github.inflationx.viewpump.ViewPump;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
+import static com.erfankazemi.drtarmast.Util.Util.aa;
 
 public class MainActivity extends AppCompatActivity {
 
   TextView stepCounter;
   TextView coveredDistance;
   TextView burnedCalories;
-  SensorManager sensorManager;
 
   final Handler handler = new Handler();
 
@@ -79,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
     //-------------------------------------------------------------------------
     stepCounter.setText("0");
     burnedCalories.setText("0");
-
-
+//
+//
     Intent serviceintent = new Intent(this, StepService.class);
     startService(serviceintent);
 
@@ -91,11 +91,9 @@ public class MainActivity extends AppCompatActivity {
     final int delay = 1500;
     handler.postDelayed(new Runnable() {
       public void run() {
-//        Toast.makeText(MainActivity.this, "I am running " + SPUtil.getStep(MainActivity.this), Toast.LENGTH_SHORT).show();
-        double step = SPUtil.getStep(MainActivity.this);
-        stepCounter.setText(Util.toPersianNumber(String.valueOf(step)));
-        coveredDistance.setText(Util.toPersianNumber(String.valueOf(BmiUtil.getCoverdDistance(step))));
-        burnedCalories.setText(Util.toPersianNumber(String.valueOf(BmiUtil.getBurnedCaleries(step))));
+        stepCounter.setText(Util.toPersianNumber(String.valueOf(aa)));
+        coveredDistance.setText(Util.toPersianNumber(String.valueOf(BmiUtil.getCoverdDistance(aa))));
+        burnedCalories.setText(Util.toPersianNumber(String.valueOf(BmiUtil.getBurnedCaleries(aa))));
         handler.postDelayed(this, delay);
       }
     }, delay);
@@ -117,4 +115,8 @@ public class MainActivity extends AppCompatActivity {
     startActivity(intent);
   }
 
+  public void BorgTest(View view) {
+    Intent intent = new Intent(this, BorgTestActivity.class);
+    startActivity(intent);
+  }
 }

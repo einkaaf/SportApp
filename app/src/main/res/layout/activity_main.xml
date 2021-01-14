@@ -206,6 +206,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="0.4"
                             android:gravity="center"
+                            android:onClick="BorgTest"
                             android:text="محاسبه سختی فعالیت"
                             android:textColor="#fff"
                             android:textSize="28sp" />
