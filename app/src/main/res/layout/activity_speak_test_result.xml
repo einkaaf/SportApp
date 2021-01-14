@@ -68,7 +68,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
                 android:layout_weight="0.5"
-                android:onClick="startTest"
+                android:onClick="contactUs"
                 android:text="تماس با ما"
                 android:textColor="@color/black"
                 app:rippleColor="#93F89D" />

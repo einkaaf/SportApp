@@ -58,6 +58,7 @@ public class WeightActivity extends AppCompatActivity {
   public void ResultClick(View view) {
     Intent intent = new Intent(this, BmiResultActivity.class);
     startActivity(intent);
+    finishAffinity();
   }
 
 

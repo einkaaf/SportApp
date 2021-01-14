@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.erfankazemi.drtarmast.MainActivity;
 import com.erfankazemi.drtarmast.R;
 import com.erfankazemi.drtarmast.Util.BmiUtil;
 
@@ -69,5 +70,12 @@ public class SexActivity extends AppCompatActivity {
   public void HeightClick(View view) {
     Intent intent = new Intent(this, HeightActivity.class);
     startActivity(intent);
+  }
+
+  @Override
+  public void onBackPressed() {
+    Intent intent = new Intent(this, MainActivity.class);
+    startActivity(intent);
+    finish();
   }
 }

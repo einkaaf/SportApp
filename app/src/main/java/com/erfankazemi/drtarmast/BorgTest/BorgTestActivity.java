@@ -1,9 +1,11 @@
 package com.erfankazemi.drtarmast.BorgTest;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.erfankazemi.drtarmast.BorgTest.Adapter.BorgTestAdapter;
+import com.erfankazemi.drtarmast.MainActivity;
 import com.erfankazemi.drtarmast.R;
 
 import java.util.Arrays;
@@ -35,6 +37,7 @@ public class BorgTestActivity extends AppCompatActivity {
                 .build());
         //-------------------------------------------------------------------------
         setContentView(R.layout.activity_borg_test);
+
         List<String> desc = Arrays.asList(
                 "استراحت و نشستن",
                 "فعالیت بسیار کم",
@@ -49,15 +52,15 @@ public class BorgTestActivity extends AppCompatActivity {
         );
         List<String> desc2 = Arrays.asList(
                 "اگر در حالت خوابیده روی تخت و یا نشستن رو مبل ، در حال استراحت هستید",
-                "فعالیت بسیار کم",
-                "فعالیت و استراحت کم",
-                "فعالیت روزمره و عادی",
-                "فعالیت عادی",
-                "فعالیت روزمره نسبتا زیاد",
-                "فعالیت  نسبتا شدید",
-                "فعالیت  شدید",
-                "فعالیت بسیار شدید",
-                "بیشترین حالت فعالیت"
+                "اگر میتوانید با یک نفس گیری مقدار زیادی صحبت کنید",
+                "هم استراحت میکنید اما کمی هم در کنارش کارهای کمی انجام میدید",
+                "کار های عادی خود را از جمله تلوزیون نگاه کردن را انجام میدهید",
+                "فعالیت های روزمره خود را اگر به درستی انجام میدهید",
+                "اگر هنگام کار فشار نسبتا کمی را متحمل میشوید",
+                "اگر ورزش را شروع کرده اید ، یا فشار های کاری شما زیاد شده است",
+                "اگر به عنوان مثال ، در حال دویدن هستید",
+                "اگر تمرینات بسیار شدیدی از جمله تمارین سنگین بدنسازی انجام میدهید",
+                "اگر به طاقت فرسا ترین حد ممکن رسیده اید و احساس تنگی نفس دارید"
         );
 
         RecyclerView borgCat = findViewById(R.id.borgRcv);
@@ -68,5 +71,12 @@ public class BorgTestActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
