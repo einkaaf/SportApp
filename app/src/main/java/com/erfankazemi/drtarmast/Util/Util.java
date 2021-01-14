@@ -2,7 +2,6 @@ package com.erfankazemi.drtarmast.Util;
 
 public class Util {
 
-    public static double aa;
 
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class BorgTestAdapter extends RecyclerView.Adapter<BorgTestAdapter.MyViewHolder> {
   private Context context;
   private List<String> descriptions;
+  private List<String> descriptions2;
   private List<String> colors = Arrays.asList(
     "#B2EBF2",
     "#80DEEA",
@@ -33,9 +34,10 @@ public class BorgTestAdapter extends RecyclerView.Adapter<BorgTestAdapter.MyView
     "#ff1744");
 
 
-  public BorgTestAdapter(Context context, List<String> descriptions) {
+  public BorgTestAdapter(Context context, List<String> descriptions,List<String> descriptions2) {
     this.context = context;
     this.descriptions = descriptions;
+    this.descriptions2 = descriptions2;
 
   }
 
@@ -50,6 +52,7 @@ public class BorgTestAdapter extends RecyclerView.Adapter<BorgTestAdapter.MyView
   public void onBindViewHolder(BorgTestAdapter.MyViewHolder holder, int position) {
     holder.number.setText(Util.toPersianNumber("" + (position + 1)));
     holder.desc.setText(descriptions.get(position));
+    holder.desc2.setText(descriptions2.get(position));
     holder.background.setBackgroundColor(Color.parseColor(colors.get(position)));
   }
 
@@ -61,12 +64,14 @@ public class BorgTestAdapter extends RecyclerView.Adapter<BorgTestAdapter.MyView
   public class MyViewHolder extends RecyclerView.ViewHolder {
     TextView number;
     TextView desc;
+    TextView desc2;
     LinearLayout background;
 
     public MyViewHolder(final View itemView) {
       super(itemView);
       number = itemView.findViewById(R.id.catnum);
       desc = itemView.findViewById(R.id.catdesc);
+      desc2 = itemView.findViewById(R.id.catdesc2);
       background = itemView.findViewById(R.id.borgCatBackground);
 
       number.setOnClickListener(new View.OnClickListener() {

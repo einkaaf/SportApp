@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.erfankazemi.drtarmast.MainActivity;
 import com.erfankazemi.drtarmast.R;
+import com.erfankazemi.drtarmast.Util.DB;
 import com.erfankazemi.drtarmast.Util.Util;
 
 import androidx.annotation.Nullable;
@@ -29,123 +30,110 @@ import androidx.core.app.NotificationCompat;
 
 public class StepService extends Service implements SensorEventListener {
 
-  SensorManager sensorManager;
-  boolean running = true;
+    SensorManager sensorManager;
+    int step;
 
-  @Override
-  public void onCreate() {
-    Toast.makeText(this, "Service was Created", Toast.LENGTH_LONG).show();
+    @Override
+    public void onCreate() {
+        Toast.makeText(this, "Service was Created", Toast.LENGTH_LONG).show();
 
-    sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
-    Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
 
-    if (countSensor != null) {
-      sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_NORMAL);
-    } else {
-      Toast.makeText(this, "گوشی شما فاقد سنسور گام شمار است!", Toast.LENGTH_SHORT).show();
+        if (countSensor != null) {
+            sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        } else {
+            Toast.makeText(this, "گوشی شما فاقد سنسور گام شمار است!", Toast.LENGTH_SHORT).show();
+        }
+
+        super.onCreate();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startMyOwnForeground();
+        } else {
+            startForeground(1, new Notification());
+        }
+        step = DB.getIntData(this, "step");
     }
 
-    super.onCreate();
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-      startMyOwnForeground();
-    else
-      startForeground(1, new Notification());
+        final Handler handler = new Handler();
+        final int delay = 10000; // 1000 milliseconds == 1 second
 
-  }
-
-  @Override
-  public int onStartCommand(Intent intent, int flags, int startId) {
-
-    final Handler handler = new Handler();
-    final int delay = 10000; // 1000 milliseconds == 1 second
-
-    handler.postDelayed(new Runnable() {
-      public void run() {
+        handler.postDelayed(new Runnable() {
+            public void run() {
 //        Toast.makeText(StepService.this, "I am running " + SPUtil.getStep(StepService.this), Toast.LENGTH_SHORT).show();
-        Log.i("SERVICE", "START-SERVICE-COMMAND");
-        handler.postDelayed(this, delay);
-      }
-    }, delay);
+                Log.i("SERVICE", "START-SERVICE-COMMAND");
+                handler.postDelayed(this, delay);
+            }
+        }, delay);
 
-    return START_STICKY;
-  }
-
-  @RequiresApi(api = Build.VERSION_CODES.O)
-  private void startMyOwnForeground() {
-    String NOTIFICATION_CHANNEL_ID = "erfankazemi.sport.1";
-    String channelName = "Sport App Channel 2";
-
-    NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_HIGH);
-    chan.setLightColor(Color.BLUE);
-    chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
-
-    NotificationManager manager = getSystemService(NotificationManager.class);
-    assert manager != null;
-    manager.createNotificationChannel(chan);
-
-    Intent notificationIntent = new Intent(this, MainActivity.class);
-    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-
-    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
-    Notification notification = notificationBuilder.setOngoing(true)
-      .setSmallIcon(R.drawable.climb)
-      .setContentTitle("Step Counter is Running!")
-      .setContentText("Dr Tarmast Health App")
-      .setPriority(NotificationManager.IMPORTANCE_MIN)
-      .setCategory(Notification.CATEGORY_SERVICE)
-      .setContentIntent(pendingIntent)
-      .build();
-
-
-    startForeground(2, notification);
-  }
-
-  @Override
-  public void onDestroy() {
-    super.onDestroy();
-    Toast.makeText(this, "Service Stopped", Toast.LENGTH_LONG).show();
-  }
-
-  @Override
-  public boolean onUnbind(Intent intent) {
-    Toast.makeText(this, "Service Unbinded", Toast.LENGTH_LONG).show();
-    return super.onUnbind(intent);
-  }
-
-  @Nullable
-  @Override
-  public IBinder onBind(Intent intent) {
-    return null;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------------------
-  @Override
-  public void onSensorChanged(SensorEvent event) {
-
-    if (event.values[0] > 50) {
-
-      sensorManager.unregisterListener(this);
-      running = false;
-      Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
-    }
-    if (running) {
-      Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-      sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_NORMAL);
-      Util.aa = event.values[0];
-      Toast.makeText(this, "2", Toast.LENGTH_SHORT).show();
-
-    } else {
-      event.values[0] = 0;
-      Util.aa= event.values[0];
-      Toast.makeText(this, "3", Toast.LENGTH_SHORT).show();
+        return START_STICKY;
     }
 
-  }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void startMyOwnForeground() {
+        String NOTIFICATION_CHANNEL_ID = "erfankazemi.sport.1";
+        String channelName = "Sport App Channel 2";
 
-  @Override
-  public void onAccuracyChanged(Sensor sensor, int i) {
+        NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_HIGH);
+        chan.setLightColor(Color.BLUE);
+        chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
 
-  }
+        NotificationManager manager = getSystemService(NotificationManager.class);
+        assert manager != null;
+        manager.createNotificationChannel(chan);
+
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+        Notification notification = notificationBuilder.setOngoing(true)
+                .setSmallIcon(R.drawable.climb)
+                .setContentTitle("Step Counter is Running!")
+                .setContentText("Dr Tarmast Health App")
+                .setPriority(NotificationManager.IMPORTANCE_MIN)
+                .setCategory(Notification.CATEGORY_SERVICE)
+                .setContentIntent(pendingIntent)
+                .build();
+
+
+        startForeground(2, notification);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Toast.makeText(this, "Service Stopped", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Toast.makeText(this, "Service Unbinded", Toast.LENGTH_LONG).show();
+        return super.onUnbind(intent);
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    //--------------------------------------------------------------------------------------------------------------------------------
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        Sensor sensor = event.sensor;
+        if (sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
+            step = step + 1;
+            DB.saveData(this, "step", step);
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
 }
