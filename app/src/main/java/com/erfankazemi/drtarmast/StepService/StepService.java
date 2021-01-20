@@ -35,7 +35,7 @@ public class StepService extends Service implements SensorEventListener {
 
     @Override
     public void onCreate() {
-        Toast.makeText(this, "Service was Created", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Service was Created", Toast.LENGTH_LONG).show();
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 

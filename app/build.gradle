@@ -70,4 +70,8 @@ dependencies {
     //android permission
     implementation 'com.karumi:dexter:6.2.2'
 
+    //date Picker irani
+    implementation 'com.github.aliab:Persian-Date-Picker-Dialog:1.5.2'
+
+
 }

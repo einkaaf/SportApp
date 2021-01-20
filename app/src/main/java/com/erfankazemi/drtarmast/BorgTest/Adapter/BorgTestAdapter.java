@@ -74,7 +74,7 @@ public class BorgTestAdapter extends RecyclerView.Adapter<BorgTestAdapter.MyView
       desc2 = itemView.findViewById(R.id.catdesc2);
       background = itemView.findViewById(R.id.borgCatBackground);
 
-      number.setOnClickListener(new View.OnClickListener() {
+      background.setOnClickListener(new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {

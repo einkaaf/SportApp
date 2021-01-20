@@ -37,4 +37,10 @@
         <item name="md_corner_radius">60dp</item>
 
     </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">#333</item>
+        <item name="colorAccent">#2BF</item>
+    </style>
+
 </resources>

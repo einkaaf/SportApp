@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
+
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -16,25 +19,57 @@
         <activity android:name=".SplashScreen.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".BorgTest.BorgResultActivity" />
+        <activity
+            android:name=".Alarm.AlarmActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.DrTarmast2" />
+        <activity
+
+            android:name=".BorgTest.BorgResultActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".BorgTest.BorgTestActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.DrTarmast2" />
-        <activity android:name=".BorgTest.BorgInfoActivity" />
-        <activity android:name=".SpeakTest.SpeakTestResultActivity" />
-        <activity android:name=".SpeakTest.SpeakTestActivity" />
-        <activity android:name=".SpeakTest.SpeakTestInfoActivity" />
-        <activity android:name=".BMI.BmiResultActivity" />
-        <activity android:name=".BMI.WeightActivity" />
-        <activity android:name=".BMI.HeightActivity" />
-        <activity android:name=".BMI.SexActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".BorgTest.BorgInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SpeakTest.SpeakTestResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SpeakTest.SpeakTestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SpeakTest.SpeakTestInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BMI.BmiResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BMI.WeightActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BMI.HeightActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BMI.SexActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name=".StepService.StepService" />
+
+        <receiver
+            android:name=".Alarm.Service.AlarmService"
+            android:enabled="true" />
+
     </application>
 
 </manifest>

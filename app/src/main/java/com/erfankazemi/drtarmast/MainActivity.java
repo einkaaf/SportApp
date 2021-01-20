@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.erfankazemi.drtarmast.Alarm.AlarmActivity;
 import com.erfankazemi.drtarmast.BMI.SexActivity;
 import com.erfankazemi.drtarmast.BorgTest.BorgTestActivity;
 import com.erfankazemi.drtarmast.SpeakTest.SpeakTestInfoActivity;
@@ -125,6 +126,13 @@ public class MainActivity extends AppCompatActivity {
         backPressedToExitOnce=false;
       }
     }, 2000);
+
+  }
+
+  public void alarmActivity(View view) {
+      Intent intent = new Intent(this, AlarmActivity.class);
+      startActivity(intent);
+      finish();
 
   }
 }
