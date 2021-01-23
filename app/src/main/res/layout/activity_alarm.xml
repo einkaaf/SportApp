@@ -64,21 +64,16 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.5"
+                            android:padding="4dp"
                             android:text="اعلان روزانه وزن ایده آل"
                             android:textColor="@color/black" />
 
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="16dp"
-                            android:gravity="center"
-                            android:padding="4dp" />
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:padding="4dp"
                         android:text="با استفاده از این اعلان ، برنامه در طول روز به شما هشدار میدهد که فراموش نکنید دنبال چه وزنی هستید ! " />
                 </LinearLayout>
 
@@ -101,22 +96,26 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.5"
+                            android:padding="4dp"
                             android:text="اعلان روزانه BMI ایده آل"
                             android:textColor="@color/black" />
 
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="16dp"
-                            android:gravity="center"
-                            android:padding="4dp" />
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:padding="4dp"
                         android:text="با استفاده از این اعلان ، برنامه در طول روز به شما هشدار میدهد که با استفاده از BMI وزن خود را چک کنید تا سالم تر بمانید" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switchWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center"
+                        android:padding="4dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -170,21 +169,16 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.5"
+                            android:padding="4dp"
                             android:text="اعلان روزانه تمرین بر اساس مسافت"
                             android:textColor="@color/black" />
 
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="16dp"
-                            android:gravity="center"
-                            android:padding="4dp" />
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:padding="4dp"
                         android:text="با استفاده از این اعلان ، برنامه در طول روز به شما هشدار میدهد که فراموش نکنید چند کیلومتر باید راه بروید تا سالم بمانید ! " />
                 </LinearLayout>
 
@@ -207,22 +201,25 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.5"
+                            android:padding="4dp"
                             android:text="اعلان روزانه تمرین بر اساس زمان"
                             android:textColor="@color/black" />
-
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="16dp"
-                            android:gravity="center"
-                            android:padding="4dp" />
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:padding="4dp"
                         android:text="با استفاده از این اعلان ، برنامه در طول روز به شما هشدار میدهد که فراموش نکنید چه مدتی راه بروید تا سالم بمانید ! " />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switchExercise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center"
+                        android:padding="4dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -231,8 +228,8 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:padding="24dp"
             android:layout_marginTop="16dp"
+            android:padding="24dp"
             android:src="@drawable/aerf" />
     </LinearLayout>
 </ScrollView>

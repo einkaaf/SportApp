@@ -1,18 +1,22 @@
 package com.erfankazemi.drtarmast.Alarm;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.widget.CompoundButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.erfankazemi.drtarmast.Alarm.Helper.AlarmHelper;
+import com.erfankazemi.drtarmast.Alarm.Service.AlarmNotificationReciver;
 import com.erfankazemi.drtarmast.R;
 
-import java.util.Calendar;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
 import io.github.inflationx.viewpump.ViewPump;
@@ -20,6 +24,13 @@ import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 public class AlarmActivity extends AppCompatActivity {
 
+  AlarmManager alarmManager;
+  PendingIntent pendingIntent;
+  SwitchCompat switchWeight, switchExercise;
+
+  boolean weightState = false, exerciseState = false;
+
+  int stateIntent = 0;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -36,40 +47,81 @@ public class AlarmActivity extends AppCompatActivity {
       .build());
     setContentView(R.layout.activity_alarm);
     //--------------Time Picker-----------------------------------------------------------
+    alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+    Intent intent = new Intent(this, AlarmNotificationReciver.class);
 
-    TimePickerDialog dialog = new TimePickerDialog(this, R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
+    switchWeight = findViewById(R.id.switchWeight);
+
+    switchWeight.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
       @Override
-      public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        weightState = isChecked;
 
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        c.set(Calendar.MINUTE, minute);
-        c.set(Calendar.SECOND, 0);
-        AlarmHelper.SetAlarm(AlarmActivity.this, c, 1);
-        Toast.makeText(AlarmActivity.this, "ok" + hourOfDay + minute, Toast.LENGTH_SHORT).show();
-      }
-    }, 1, 0, true);
+        if (weightState && exerciseState) {
 
+          intent.putExtra("notificationState", "1");
+          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
+          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+        }
+        if (!weightState && exerciseState) {
+          intent.putExtra("notificationState", "2");
+          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
+          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+        }
+        if (weightState && !exerciseState) {
+          intent.putExtra("notificationState", "3");
+          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
+          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+        }
+        if (!weightState && !exerciseState) {
+          intent.putExtra("notificationState", "4");
+          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
+          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+        }
 
-    dialog.setButton(DialogInterface.BUTTON_POSITIVE, "تایید", new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int which) {
 
       }
     });
 
-    dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "بیخیال", new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int which) {
+    switchExercise = findViewById(R.id.switchExercise);
 
+    switchExercise.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        exerciseState = isChecked;
+
+        if (weightState && exerciseState) {
+
+          intent.putExtra("notificationState", "1");
+          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
+          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+        }
+        if (!weightState && exerciseState) {
+          intent.putExtra("notificationState", "2");
+          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
+          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+        }
+        if (weightState && !exerciseState) {
+          intent.putExtra("notificationState", "3");
+          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
+          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+        }
+        if (!weightState && !exerciseState) {
+          intent.putExtra("notificationState", "4");
+          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
+          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+        }
       }
     });
 
-    dialog.setCancelable(false);
 
-    dialog.show();
+    intent.putExtra("notificationState", "4");
+    pendingIntent = PendingIntent.getBroadcast(this, 10, intent, 0);
 
-    //--------------Time Picker-----------------------------------------------------------
+
+    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+
+
   }
 
   @Override
