@@ -7,6 +7,7 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.erfankazemi.drtarmast.R;
 
@@ -32,6 +33,7 @@ public class AlarmNotificationReciver extends BroadcastReceiver {
     NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId);
 
     String notificationState = intent.getStringExtra("notificationState");
+    Toast.makeText(context, ""+notificationState, Toast.LENGTH_SHORT).show();
 
     switch (notificationState) {
       case "1":
@@ -60,9 +62,9 @@ public class AlarmNotificationReciver extends BroadcastReceiver {
         break;
       default:
         builder.setSmallIcon(R.drawable.body_scale)
-          .setContentTitle("د !")
-          .setContentText("یادتان نردارید !")
-          .setAutoCancel(true);
+          .setContentTitle("سلامتی مهم تر از همه چیزه !")
+          .setContentText("یادتان نرود که بدن خود را سالم نگه دارید !")
+          .setAutoCancel(true);;
         break;
     }
 
