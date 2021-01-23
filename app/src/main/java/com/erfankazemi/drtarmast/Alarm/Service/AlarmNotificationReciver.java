@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import com.erfankazemi.drtarmast.R;
+import com.erfankazemi.drtarmast.Util.DB;
 
 import androidx.core.app.NotificationCompat;
 
@@ -32,8 +33,9 @@ public class AlarmNotificationReciver extends BroadcastReceiver {
     }
     NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId);
 
-    String notificationState = intent.getStringExtra("notificationState");
-    Toast.makeText(context, ""+notificationState, Toast.LENGTH_SHORT).show();
+    String notificationState = DB.getStringData(context, "NOTIF");
+
+    Toast.makeText(context, "" + notificationState, Toast.LENGTH_SHORT).show();
 
     switch (notificationState) {
       case "1":
@@ -50,7 +52,7 @@ public class AlarmNotificationReciver extends BroadcastReceiver {
         break;
       case "3":
         builder.setSmallIcon(R.drawable.body_scale)
-          .setContentTitle("یادآوری کحاسبه اضافه وزن")
+          .setContentTitle("یادآوری محاسبه اضافه وزن")
           .setContentText("شما میتوانید با استفاده از Bmi مقدار اضافه وزن خود را محاسبه کنید!")
           .setAutoCancel(true);
         break;
@@ -64,7 +66,8 @@ public class AlarmNotificationReciver extends BroadcastReceiver {
         builder.setSmallIcon(R.drawable.body_scale)
           .setContentTitle("سلامتی مهم تر از همه چیزه !")
           .setContentText("یادتان نرود که بدن خود را سالم نگه دارید !")
-          .setAutoCancel(true);;
+          .setAutoCancel(true);
+        ;
         break;
     }
 

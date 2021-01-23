@@ -45,19 +45,19 @@ public class SpeakTestActivity extends AppCompatActivity {
       public boolean onSegmentSelectRequest(SegmentViewHolder segmentViewHolder) {
         switch (segmentViewHolder.getAbsolutePosition()) {
           case 0:
-            DB.saveData(SpeakTestActivity.this, "speak", "فشار زیاد تمرین");
+            DB.saveData(SpeakTestActivity.this, "SPK", "فشار زیاد تمرین");
             break;
           case 1:
-            DB.saveData(SpeakTestActivity.this, "speak", "فشار نسبتا زیاد");
+            DB.saveData(SpeakTestActivity.this, "SPK", "فشار نسبتا زیاد");
             break;
           case 2:
-            DB.saveData(SpeakTestActivity.this, "speak", "ترین نرمال");
+            DB.saveData(SpeakTestActivity.this, "SPK", "ترین نرمال");
             break;
           case 3:
-            DB.saveData(SpeakTestActivity.this, "speak", "بدون سختی");
+            DB.saveData(SpeakTestActivity.this, "SPK", "بدون سختی");
             break;
           default:
-            DB.saveData(SpeakTestActivity.this, "speak", "بدون مقدار");
+            DB.saveData(SpeakTestActivity.this, "SPK", "بدون مقدار");
             break;
         }
         intent.putExtra("activity-hardness", String.valueOf(segmentViewHolder.getAbsolutePosition()));
@@ -79,5 +79,12 @@ public class SpeakTestActivity extends AppCompatActivity {
   @Override
   protected void attachBaseContext(Context newBase) {
     super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+  }
+
+  @Override
+  public void onBackPressed() {
+    Intent intent = new Intent(this, SpeakTestInfoActivity.class);
+    startActivity(intent);
+    finish();
   }
 }

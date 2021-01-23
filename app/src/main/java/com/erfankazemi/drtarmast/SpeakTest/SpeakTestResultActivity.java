@@ -1,12 +1,5 @@
 package com.erfankazemi.drtarmast.SpeakTest;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import io.github.inflationx.calligraphy3.CalligraphyConfig;
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
-import io.github.inflationx.viewpump.ViewPump;
-import io.github.inflationx.viewpump.ViewPumpContextWrapper;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +7,13 @@ import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.erfankazemi.drtarmast.MainActivity;
 import com.erfankazemi.drtarmast.R;
+
+import androidx.appcompat.app.AppCompatActivity;
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 public class SpeakTestResultActivity extends AppCompatActivity {
 
@@ -78,6 +76,13 @@ public class SpeakTestResultActivity extends AppCompatActivity {
   }
 
   public void goHome(View view) {
+    Intent intent = new Intent(this, SpeakTestActivity.class);
+    startActivity(intent);
+    finish();
+  }
+
+  @Override
+  public void onBackPressed() {
     Intent intent = new Intent(this, SpeakTestActivity.class);
     startActivity(intent);
     finish();

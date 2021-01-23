@@ -2,18 +2,16 @@ package com.erfankazemi.drtarmast.Alarm;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.widget.CompoundButton;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.erfankazemi.drtarmast.Alarm.Service.AlarmNotificationReciver;
+import com.erfankazemi.drtarmast.MainActivity;
 import com.erfankazemi.drtarmast.R;
+import com.erfankazemi.drtarmast.Util.DB;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
@@ -21,6 +19,9 @@ import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
 import io.github.inflationx.viewpump.ViewPump;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
+import static com.erfankazemi.drtarmast.Config.TimeConfig.startTimeInterval;
+import static com.erfankazemi.drtarmast.Config.TimeConfig.timeInterval;
 
 public class AlarmActivity extends AppCompatActivity {
 
@@ -47,8 +48,16 @@ public class AlarmActivity extends AppCompatActivity {
       .build());
     setContentView(R.layout.activity_alarm);
     //--------------Time Picker-----------------------------------------------------------
+
     alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
     Intent intent = new Intent(this, AlarmNotificationReciver.class);
+    intent.putExtra("notificationState", "4");
+
+    pendingIntent = PendingIntent.getBroadcast(this, 10, intent, 0);
+
+    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + startTimeInterval, timeInterval, pendingIntent);
+
 
     switchWeight = findViewById(R.id.switchWeight);
 
@@ -59,26 +68,28 @@ public class AlarmActivity extends AppCompatActivity {
 
         if (weightState && exerciseState) {
 
-          intent.putExtra("notificationState", "1");
-          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
-          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+          CancelAlarm();
+          StartAlarm(1);
+
         }
         if (!weightState && exerciseState) {
-          intent.putExtra("notificationState", "2");
-          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
-          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+
+          CancelAlarm();
+          StartAlarm(2);
+
         }
         if (weightState && !exerciseState) {
-          intent.putExtra("notificationState", "3");
-          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
-          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+
+          CancelAlarm();
+          StartAlarm(3);
+
         }
         if (!weightState && !exerciseState) {
-          intent.putExtra("notificationState", "4");
-          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
-          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
-        }
 
+          CancelAlarm();
+          StartAlarm(4);
+
+        }
 
       }
     });
@@ -92,35 +103,60 @@ public class AlarmActivity extends AppCompatActivity {
 
         if (weightState && exerciseState) {
 
-          intent.putExtra("notificationState", "1");
-          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
-          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+          CancelAlarm();
+          StartAlarm(1);
+
         }
         if (!weightState && exerciseState) {
-          intent.putExtra("notificationState", "2");
-          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
-          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+
+          CancelAlarm();
+          StartAlarm(2);
+
         }
         if (weightState && !exerciseState) {
-          intent.putExtra("notificationState", "3");
-          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
-          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+
+          CancelAlarm();
+          StartAlarm(3);
+
         }
         if (!weightState && !exerciseState) {
-          intent.putExtra("notificationState", "4");
-          pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
-          alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
+
+          CancelAlarm();
+          StartAlarm(4);
+
         }
       }
     });
 
 
-    intent.putExtra("notificationState", "4");
+  }
+
+  private void CancelAlarm() {
+    Intent intent = new Intent(AlarmActivity.this, AlarmNotificationReciver.class);
+    PendingIntent pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 10, intent, 0);
+    AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+    alarmManager.cancel(pendingIntent);
+  }
+
+  private void StartAlarm(int state) {
+    if (state == 0) {
+      state = 5;
+    }
+
+    DB.saveData(AlarmActivity.this, "NOTIF", String.valueOf(state));
+
+    AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+    Intent intent = new Intent(this, AlarmNotificationReciver.class);
     pendingIntent = PendingIntent.getBroadcast(this, 10, intent, 0);
+    am.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + startTimeInterval, timeInterval, pendingIntent);
 
+  }
 
-    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 3000, pendingIntent);
-
+  @Override
+  public void onBackPressed() {
+    Intent intent = new Intent(this, MainActivity.class);
+    startActivity(intent);
+    finish();
 
   }
 

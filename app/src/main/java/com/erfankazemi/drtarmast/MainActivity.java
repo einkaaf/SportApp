@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(this, delay);
       }
     }, delay);
-    speakStatus.setText(DB.getStringData(MainActivity.this, "speak"));
+    String aa=DB.getStringData(MainActivity.this, "SPK");
+    speakStatus.setText(aa);
     super.onResume();
   }
 
