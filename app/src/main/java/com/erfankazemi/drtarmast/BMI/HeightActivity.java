@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.erfankazemi.drtarmast.MainActivity;
 import com.erfankazemi.drtarmast.R;
 import com.erfankazemi.drtarmast.Util.BmiUtil;
 import com.ramotion.fluidslider.FluidSlider;
@@ -58,7 +57,6 @@ public class HeightActivity extends AppCompatActivity {
   public void WeightClick(View view) {
     Intent intent = new Intent(this, WeightActivity.class);
     startActivity(intent);
-    finish();
   }
 
   public void minHeight(View view) {

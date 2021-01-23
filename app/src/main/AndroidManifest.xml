@@ -64,7 +64,7 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
 
-        <service android:name=".StepService.StepService"></service>
+        <service android:name=".StepService.StepService"/>
 
         <receiver android:name=".Alarm.Service.AlarmNotificationReciver"/>
 

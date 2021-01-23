@@ -1,12 +1,5 @@
 package com.erfankazemi.drtarmast.BMI;
 
-import androidx.appcompat.app.AppCompatActivity;
-import io.github.inflationx.calligraphy3.CalligraphyConfig;
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
-import io.github.inflationx.viewpump.ViewPump;
-import io.github.inflationx.viewpump.ViewPumpContextWrapper;
-import kotlin.Unit;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +9,13 @@ import android.widget.TextView;
 import com.erfankazemi.drtarmast.R;
 import com.erfankazemi.drtarmast.Util.BmiUtil;
 import com.ramotion.fluidslider.FluidSlider;
+
+import androidx.appcompat.app.AppCompatActivity;
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+import kotlin.Unit;
 
 public class WeightActivity extends AppCompatActivity {
   TextView txt;
@@ -58,7 +58,6 @@ public class WeightActivity extends AppCompatActivity {
   public void ResultClick(View view) {
     Intent intent = new Intent(this, BmiResultActivity.class);
     startActivity(intent);
-    finishAffinity();
   }
 
 
