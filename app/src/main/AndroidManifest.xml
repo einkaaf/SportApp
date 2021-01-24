@@ -11,8 +11,14 @@
     android:supportsRtl="true"
     android:theme="@style/Theme.DrTarmast"
     >
-    <activity android:name=".ContactUs.ContactUsActivity"></activity>
-    <activity android:name=".SplashScreen.SplashActivity">
+    <activity
+      android:name=".ContactUs.ContactUsActivity"
+      android:screenOrientation="portrait"
+      />
+    <activity
+      android:name=".SplashScreen.SplashActivity"
+      android:screenOrientation="portrait"
+      >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
@@ -74,6 +80,7 @@
 
     <service android:name=".StepService.StepService" />
   </application>
+
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
   <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
   <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />

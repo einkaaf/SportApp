@@ -81,8 +81,13 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(this, delay);
       }
     }, delay);
-    String aa=DB.getStringData(MainActivity.this, "SPK");
-    speakStatus.setText(aa);
+    String speakStatusValue = DB.getStringData(MainActivity.this, "SPK");
+    if (speakStatusValue == null) {
+      speakStatus.setText("بدون مقدار");
+    } else {
+      speakStatus.setText(speakStatusValue);
+    }
+
     super.onResume();
   }
 
@@ -108,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
     startActivity(intent);
     finish();
   }
+
   private boolean backPressedToExitOnce;
 
   @Override
@@ -124,16 +130,16 @@ public class MainActivity extends AppCompatActivity {
 
       @Override
       public void run() {
-        backPressedToExitOnce=false;
+        backPressedToExitOnce = false;
       }
     }, 2000);
 
   }
 
   public void alarmActivity(View view) {
-      Intent intent = new Intent(this, AlarmActivity.class);
-      startActivity(intent);
-      finish();
+    Intent intent = new Intent(this, AlarmActivity.class);
+    startActivity(intent);
+    finish();
 
   }
 }

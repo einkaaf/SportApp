@@ -54,6 +54,6 @@ public class SpeakTestInfoActivity extends AppCompatActivity {
   public void onBackPressed() {
     Intent intent = new Intent(this, MainActivity.class);
     startActivity(intent);
-    finish();
+    finishAffinity();
   }
 }

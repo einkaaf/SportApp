@@ -59,5 +59,13 @@ public class SplashActivity extends AppCompatActivity {
     } else {
       Log.i("android version", "build version < 29");
     }
+    CheckNotif();
+  }
+
+  public void CheckNotif() {
+    String notifState = DB.getStringData(SplashActivity.this, "NOTIF");
+    if (notifState == null) {
+      DB.saveData(SplashActivity.this, "NOTIF", String.valueOf(4));
+    }
   }
 }
