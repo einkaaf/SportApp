@@ -1,73 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.erfankazemi.drtarmast">
+<manifest
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.erfankazemi.drtarmast"
+  >
 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-    <uses-permission android:name="android.permission.SET_ALARM" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+  <application
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/Theme.DrTarmast"
+    >
+    <activity android:name=".ContactUs.ContactUsActivity"></activity>
+    <activity android:name=".SplashScreen.SplashActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
 
-    <application
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.DrTarmast">
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity
+      android:name=".Alarm.AlarmActivity"
+      android:screenOrientation="portrait"
+      android:theme="@style/Theme.DrTarmast2"
+      />
+    <activity
+      android:name=".BorgTest.BorgResultActivity"
+      android:screenOrientation="portrait"
+      />
+    <activity
+      android:name=".BorgTest.BorgTestActivity"
+      android:screenOrientation="portrait"
+      android:theme="@style/Theme.DrTarmast2"
+      />
+    <activity
+      android:name=".BorgTest.BorgInfoActivity"
+      android:screenOrientation="portrait"
+      />
+    <activity
+      android:name=".SpeakTest.SpeakTestResultActivity"
+      android:screenOrientation="portrait"
+      />
+    <activity
+      android:name=".SpeakTest.SpeakTestActivity"
+      android:screenOrientation="portrait"
+      />
+    <activity
+      android:name=".SpeakTest.SpeakTestInfoActivity"
+      android:screenOrientation="portrait"
+      />
+    <activity
+      android:name=".BMI.BmiResultActivity"
+      android:screenOrientation="portrait"
+      />
+    <activity
+      android:name=".BMI.WeightActivity"
+      android:screenOrientation="portrait"
+      />
+    <activity
+      android:name=".BMI.HeightActivity"
+      android:screenOrientation="portrait"
+      />
+    <activity
+      android:name=".BMI.SexActivity"
+      android:screenOrientation="portrait"
+      />
+    <activity
+      android:name=".MainActivity"
+      android:screenOrientation="portrait"
+      />
 
-        <activity android:name=".SplashScreen.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+    <receiver android:name=".Alarm.Service.AlarmNotificationReciver" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+    <service android:name=".StepService.StepService" />
+  </application>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+  <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+  <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+  <uses-permission android:name="android.permission.SET_ALARM" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-        <activity
-            android:name=".Alarm.AlarmActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.DrTarmast2" />
-        <activity
-
-            android:name=".BorgTest.BorgResultActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".BorgTest.BorgTestActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.DrTarmast2" />
-        <activity
-            android:name=".BorgTest.BorgInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".SpeakTest.SpeakTestResultActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".SpeakTest.SpeakTestActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".SpeakTest.SpeakTestInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".BMI.BmiResultActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".BMI.WeightActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".BMI.HeightActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".BMI.SexActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait" />
-
-        <service android:name=".StepService.StepService"/>
-
-        <receiver android:name=".Alarm.Service.AlarmNotificationReciver"/>
-
-    </application>
+  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
 </manifest>

@@ -1,13 +1,13 @@
 <resources>
-    <string name="app_name">Dr.Tarmast</string>
-    <string name="Walking">20sp</string>
-    <!-- TODO: Remove or change this placeholder text -->
+  <string name="app_name">Dr.Tarmast</string>
+  <string name="Walking">20sp</string>
+  <!-- TODO: Remove or change this placeholder text -->
 
-    <string-array name="speakArray">
-        <item>ناخوانا</item>
-        <item>سخت</item>
-        <item>معمولی</item>
-        <item>راحت</item>
-    </string-array>
+  <string-array name="speakArray">
+    <item>ناخوانا</item>
+    <item>سخت</item>
+    <item>معمولی</item>
+    <item>راحت</item>
+  </string-array>
 
 </resources>

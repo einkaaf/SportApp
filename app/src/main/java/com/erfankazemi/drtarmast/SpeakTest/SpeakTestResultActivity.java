@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.erfankazemi.drtarmast.MainActivity;
 import com.erfankazemi.drtarmast.R;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -73,10 +74,11 @@ public class SpeakTestResultActivity extends AppCompatActivity {
   }
 
   public void contactUs(View view) {
+
   }
 
   public void goHome(View view) {
-    Intent intent = new Intent(this, SpeakTestActivity.class);
+    Intent intent = new Intent(this, MainActivity.class);
     startActivity(intent);
     finish();
   }
