@@ -171,9 +171,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:onClick="BorgTest"
                         android:orientation="vertical"
                         android:padding="8dp"
-                        android:onClick="BorgTest"
                         android:weightSum="1">
 
                         <LinearLayout
@@ -230,8 +230,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_margin="4dp"
-                    app:cardBackgroundColor="#96DA44"
                     android:onClick="alarmActivity"
+                    app:cardBackgroundColor="#96DA44"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="4dp">
 
@@ -274,9 +274,9 @@
                             android:layout_gravity="center"
                             android:layout_weight="0.3"
                             android:gravity="center"
-                            android:text="هنوز هشداری ایجاد نکرده اید"
+                            android:text="هشدار های روزانه"
                             android:textColor="#fff"
-                            android:textSize="20dp" />
+                            android:textSize="23dp" />
 
 
                         <TextView
@@ -368,7 +368,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="0.5"
-                                android:text="هدف روزانه"
+                                android:text="هدف روزانه | متر"
                                 android:textColor="#9EFFFFFF"
                                 android:textSize="@dimen/textTitleDesc" />
 
@@ -516,7 +516,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="0.5"
-                                android:text="هدف روزانه"
+                                android:text="هدف روزانه | کالری"
                                 android:textColor="#9EFFFFFF"
                                 android:textSize="@dimen/textTitleDesc" />
 
@@ -533,11 +533,7 @@
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
             </LinearLayout>
-
-
         </LinearLayout>
-
     </LinearLayout>
 </ScrollView>

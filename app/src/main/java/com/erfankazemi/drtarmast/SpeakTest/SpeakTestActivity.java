@@ -51,7 +51,7 @@ public class SpeakTestActivity extends AppCompatActivity {
             DB.saveData(SpeakTestActivity.this, "SPK", "فشار نسبتا زیاد");
             break;
           case 2:
-            DB.saveData(SpeakTestActivity.this, "SPK", "ترین نرمال");
+            DB.saveData(SpeakTestActivity.this, "SPK", "تمرین نرمال");
             break;
           case 3:
             DB.saveData(SpeakTestActivity.this, "SPK", "بدون سختی");

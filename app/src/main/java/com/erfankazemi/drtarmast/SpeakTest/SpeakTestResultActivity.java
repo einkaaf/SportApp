@@ -54,7 +54,7 @@ public class SpeakTestResultActivity extends AppCompatActivity {
         scrollView.setBackgroundResource(R.drawable.bmi_gradient_extra);
         break;
       case "2":
-        title.setText("ترین نرمال");
+        title.setText("تمرین نرمال");
         desc.setText("خیلی جالب است که بدانید برای بیمارانی که قبلا سکته\u200Cی قلبی را تجربه کرده\u200Cاند، ورزش و تحرک فیزیکی حتی از درمان دارویی هم مؤثرتر بود. پس هر چه زودتر با پزشک\u200Cتان صحبت کنید تا با کمک هم یک برنامه\u200Cی ورزشی مناسب را تنظیم کنید");
         scrollView.setBackgroundResource(R.drawable.bmi_gradient_good);
         break;
@@ -66,6 +66,7 @@ public class SpeakTestResultActivity extends AppCompatActivity {
       default:
         title.setText("----");
         desc.setText("----");
+        break;
     }
   }
 

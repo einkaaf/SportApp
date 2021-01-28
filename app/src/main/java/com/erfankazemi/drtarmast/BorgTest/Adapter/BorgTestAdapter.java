@@ -79,7 +79,7 @@ public class BorgTestAdapter extends RecyclerView.Adapter<BorgTestAdapter.MyView
         @Override
         public void onClick(View v) {
           final int IDClick = getAdapterPosition();
-          Toast.makeText(context, "" + IDClick, Toast.LENGTH_SHORT).show();
+//          Toast.makeText(context, "" + IDClick, Toast.LENGTH_SHORT).show();
 //          switch (IDClick) {
 //            case 0:
 //              break;

@@ -1,8 +1,11 @@
 package com.erfankazemi.drtarmast.ContactUs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
+import com.erfankazemi.drtarmast.MainActivity;
 import com.erfankazemi.drtarmast.R;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,5 +37,11 @@ public class ContactUsActivity extends AppCompatActivity {
   @Override
   protected void attachBaseContext(Context newBase) {
     super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+  }
+
+  public void goHome(View view) {
+    Intent intent = new Intent(this, MainActivity.class);
+    startActivity(intent);
+    finishAffinity();
   }
 }

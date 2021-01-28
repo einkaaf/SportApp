@@ -1,6 +1,7 @@
 package com.erfankazemi.drtarmast.SplashScreen;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,14 +19,28 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import androidx.appcompat.app.AppCompatActivity;
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 public class SplashActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    //-------------------------------------------------------------------------
     getSupportActionBar().hide();
+    //-------------------------------------------------------------------------
+    ViewPump.init(ViewPump.builder()
+      .addInterceptor(new CalligraphyInterceptor(
+        new CalligraphyConfig.Builder()
+          .setDefaultFontPath("fonts/Avtheme.ttf")
+          .setFontAttrId(R.attr.fontPath)
+          .build()))
+      .build());
     setContentView(R.layout.activity_splash);
+    //-------------------------------------------------------------------------
     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
 
     //-------------------------------------Init MainActivty------------------------------------
@@ -68,4 +83,10 @@ public class SplashActivity extends AppCompatActivity {
       DB.saveData(SplashActivity.this, "NOTIF", String.valueOf(4));
     }
   }
+
+  @Override
+  protected void attachBaseContext(Context newBase) {
+    super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+  }
+
 }
