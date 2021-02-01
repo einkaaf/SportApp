@@ -72,6 +72,8 @@ public class SplashActivity extends AppCompatActivity {
           }
         }).check();
     } else {
+      startActivity(intent);
+      finish();
       Log.i("android version", "build version < 29");
     }
     CheckNotif();

@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@drawable/wk"
+                android:background="@drawable/wkk"
                 android:gravity="center"
                 android:onClick="BmiCalculate"
                 android:orientation="vertical"
@@ -209,9 +209,9 @@
                             android:layout_gravity="center"
                             android:layout_weight="0.4"
                             android:gravity="center"
-                            android:text="محاسبه سختی فعالیت"
+                            android:text="سختی فعالیت"
                             android:textColor="#fff"
-                            android:textSize="27sp" />
+                            android:textSize="25sp" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -438,7 +438,7 @@
                             android:gravity="center"
                             android:text="فشار بالا تمرین"
                             android:textColor="#fff"
-                            android:textSize="40dp" />
+                            android:textSize="20dp" />
 
                         <TextView
                             android:layout_width="match_parent"

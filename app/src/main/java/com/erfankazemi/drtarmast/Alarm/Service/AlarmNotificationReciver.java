@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.widget.Toast;
 
 import com.erfankazemi.drtarmast.R;
 import com.erfankazemi.drtarmast.Util.DB;
@@ -26,7 +25,10 @@ public class AlarmNotificationReciver extends BroadcastReceiver {
     int notificationId = 1;
     String channelId = "Erfan-app-channel";
     String channelName = "ErfanKazemi";
-    int importance = NotificationManager.IMPORTANCE_HIGH;
+    int importance = 0;
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+      importance = NotificationManager.IMPORTANCE_HIGH;
+    }
 
     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
       NotificationChannel mChannel = new NotificationChannel(
@@ -37,7 +39,6 @@ public class AlarmNotificationReciver extends BroadcastReceiver {
 
     String notificationState = DB.getStringData(context, "NOTIF");
 
-    Toast.makeText(context, "" + notificationState, Toast.LENGTH_SHORT).show();
 
     Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.body_scale);
 

@@ -69,7 +69,7 @@
                 android:layout_weight="0.6"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:textSize="50sp" />
+                android:textSize="30sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -87,10 +87,9 @@
         <com.ramotion.fluidslider.FluidSlider
             android:id="@+id/slider"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:layout_weight="0.20"
             android:padding="8dp"
             app:bar_color="@color/white"
             app:bar_text_color="@color/black"
